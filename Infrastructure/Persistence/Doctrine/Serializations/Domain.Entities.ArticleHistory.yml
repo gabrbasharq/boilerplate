@@ -1,0 +1,23 @@
+Domain\Entities\ArticleHistory:
+#  exclusion_policy: ALL
+  properties:
+    content:
+      exclude: true
+    article:
+      exclude: true
+    createdBy:
+      exclude: true
+    createdAt:
+      exclude: true
+    status:
+      exclude: true
+    timeSpentEditing:
+      exclude: true
+
+
+  virtual_properties:
+    getHtmlContent:
+    getSimpleCreatedBy:
+    getCreatedAtFormatted:
+    getStatusWord:
+    timeTaken:

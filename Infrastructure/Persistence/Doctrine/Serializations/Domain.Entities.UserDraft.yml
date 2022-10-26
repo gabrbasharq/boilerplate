@@ -1,0 +1,14 @@
+Domain\Entities\UserDraft:
+  #  exclusion_policy: ALL
+  properties:
+    content:
+      exclude: true
+    createdBy:
+      exclude: true
+    type:
+      exclude: true
+
+
+  virtual_properties:
+    getTypeName:
+    getContent:

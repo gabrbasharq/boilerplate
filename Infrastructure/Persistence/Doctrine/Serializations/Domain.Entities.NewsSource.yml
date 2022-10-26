@@ -1,0 +1,7 @@
+Domain\Entities\NewsSource:
+  #exclusion_policy: ALL
+  properties:
+    articles:
+        exclude: true
+    createdBy:
+      exclude: true

@@ -1,0 +1,193 @@
+Domain\Entities\Stock\StockSecurity:
+    type: entity
+    table: stock_securities
+    indexes:
+      idIdx:
+        columns: [ id ]
+      displayNameIdx:
+        columns: [ display_name ]
+      codeIdx:
+        columns: [ code ]
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        displayName:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+            column: display_name
+        labelName:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+            column: label_name
+        description:
+            type: string
+            nullable: true
+            length: 1024
+            options:
+                fixed: false
+        code:
+            type: string
+            nullable: true
+            length: 256
+            unique: true
+            options:
+                fixed: false
+        type:
+          type: smallint
+          nullable: false
+          options:
+            default: 0
+        address:
+          type: string
+          nullable: true
+          length: 2024
+          options:
+            fixed: false
+        execOfficers:
+          type: json_array
+          nullable: true
+          options:
+            fixed: false
+            column: exec_officers
+        boardMembers:
+          type: json_array
+          nullable: true
+          options:
+            fixed: false
+            column: board_members
+        active:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+        views:
+          type: integer
+          nullable: false
+          options:
+            default: 0
+        inTicker:
+          type: integer
+          nullable: false
+          options:
+            default: 0
+          column: in_ticker
+        tickerPosition:
+          type: integer
+          nullable: false
+          options:
+            fixed: false
+          column: ticker_position
+        inTickerMob:
+          type: integer
+          nullable: false
+          options:
+            default: 0
+          column: in_ticker_mob
+        tickerMobPosition:
+          type: integer
+          nullable: false
+          options:
+            fixed: false
+          column: ticker_mob_position
+        authorizedApiData:
+              type: smallint
+              nullable: false
+              options:
+                default: 1
+              column: authorized_api_data
+        openStatus:
+          type: smallint
+          nullable: false
+          options:
+            default: 0
+        synced:
+          type: integer
+          nullable: false
+          options:
+            default: 0
+        slug:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: slug
+        marketValueCode:
+          type: string
+          nullable: true
+          length: 32
+          options:
+            fixed: false
+          column: market_value_code
+        marketVolumeCode:
+          type: string
+          nullable: true
+          length: 32
+          options:
+            fixed: false
+          column: market_volume_code
+        longCompanyName:
+          type: string
+          nullable: true
+          length: 512
+        fromCache:
+          type: smallint
+          nullable: false
+          options:
+            default: 0
+    manyToOne:
+        country:
+          targetEntity: Domain\Entities\Stock\StockCountry
+          nullable: true
+          inversedBy: markets
+          joinColumn:
+            name: country_id
+            referencedColumnName: id
+        disclaimer:
+          targetEntity: Domain\Entities\Stock\StockDisclaimer
+          nullable: true
+          joinColumn:
+            name: disclaimer_id
+            referencedColumnName: id
+            onDelete: "SET NULL"
+        weatherCity:
+          targetEntity: Domain\Entities\Weather\WeatherCity
+          nullable: true
+          joinColumn:
+            name: weather_id
+            referencedColumnName: id
+            onDelete: "SET NULL"
+    oneToMany:
+      parents:
+        targetEntity: Domain\Entities\Stock\SecurityRelation
+        mappedBy: parent
+      childrens:
+        targetEntity: Domain\Entities\Stock\SecurityRelation
+        mappedBy: children
+      suggestions:
+        targetEntity: Domain\Entities\Stock\StockSecuritySuggestion
+        mappedBy: security
+    manyToMany:
+        articles:
+          targetEntity: Domain\Entities\Article
+          mappedBy: securities
+        regions:
+          targetEntity: Domain\Entities\Stock\StockRegion
+          mappedBy: securities
+
+    lifecycleCallbacks:
+            prePersist: [setSlug]
+            preUpdate: [setSlug]

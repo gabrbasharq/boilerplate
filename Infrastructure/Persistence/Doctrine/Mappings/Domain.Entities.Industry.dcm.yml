@@ -1,0 +1,21 @@
+Domain\Entities\Industry:
+    type: entity
+    table: industries
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+
+    lifecycleCallbacks:

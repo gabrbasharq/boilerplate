@@ -1,0 +1,28 @@
+Domain\Entities\Component:
+#  exclusion_policy: ALL
+  properties:
+     contentTypes:
+        exclude: true
+     auto:
+       exclude: true
+     clickable:
+       exclude: true
+     hasContentByCountry:
+       exclude: true
+     hasCustomUrl:
+       exclude: true
+     pages:
+       exclude: true
+
+#     articles:
+#        groups: [All]
+
+  virtual_properties:
+    getContentTypes:
+    getContentTypesNames:
+      serialized_name: ContentTypesNames
+    isAuto:
+    isClickable:
+    isHasContentByCountry:
+    isHasCustomUrl:
+

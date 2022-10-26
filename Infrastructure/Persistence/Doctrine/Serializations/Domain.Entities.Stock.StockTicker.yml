@@ -1,0 +1,10 @@
+Domain\Entities\Stock\StockTicker:
+#  exclusion_policy: ALL
+  properties:
+     username:
+        exclude: true
+     password:
+        exclude: true
+
+  virtual_properties:
+      getUrl:

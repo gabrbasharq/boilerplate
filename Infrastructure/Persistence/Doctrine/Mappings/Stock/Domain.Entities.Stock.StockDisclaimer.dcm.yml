@@ -1,0 +1,28 @@
+Domain\Entities\Stock\StockDisclaimer:
+    type: entity
+    table: stock_disclamiers
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+        description:
+            type: text
+            nullable: false
+            options:
+                fixed: false
+    oneToMany:
+        securities:
+            targetEntity: Domain\Entities\Stock\StockSecurity
+            mappedBy: disclamier

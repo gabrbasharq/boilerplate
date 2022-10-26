@@ -1,0 +1,10 @@
+/vendor
+/node_modules
+package-lock.json
+composer.lock
+.DS_Store
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+.phpunit.result.cache

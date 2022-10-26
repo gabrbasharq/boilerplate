@@ -1,0 +1,9 @@
+Domain\Entities\Stock\StockRegion:
+#  exclusion_policy: ALL
+  properties:
+     securities:
+        groups: [securities]
+     countries:
+        groups: [countries]
+
+  virtual_properties: {}

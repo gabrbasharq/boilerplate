@@ -1,0 +1,14 @@
+Domain\Entities\Image:
+  #exclusion_policy: ALL
+  properties:
+     coordinates:
+        exclude: true
+     articles:
+        exclude: true
+
+  virtual_properties:
+    getImagesUrls:
+      serialized_name: imagesUrls
+
+    getCoordinates:
+    isHasArticles:

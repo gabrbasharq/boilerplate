@@ -1,0 +1,94 @@
+Domain\Entities\Page:
+    type: entity
+    table: pages
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+            column: name
+        displayName:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+            column: display_name
+        slug:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: slug
+        hasScrollingComponent:
+          type: smallint
+          nullable: false
+          options:
+            default: 0
+          column: has_sScrolling_component
+        hasMarketTicker:
+          type: smallint
+          nullable: false
+          options:
+            default: 0
+          column: hasMarketTicker
+        hasDynamicMenu:
+          type: smallint
+          nullable: false
+          options:
+            default: 0
+          column: hasDynamicMenu
+        countriesCodes:
+            type: string
+            nullable: true
+            length: 128
+            options:
+                fixed: false
+            column: countries_codes
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        url:
+          type: string
+          nullable: true
+          length: 128
+          options:
+            fixed: fals
+    manyToOne:
+        createdBy:
+          targetEntity: Domain\Entities\User
+          inversedBy: articles
+          joinColumn:
+            name: created_by
+            referencedColumnName: id
+        logo:
+          targetEntity: Domain\Entities\Image
+          joinColumn:
+            name: logo_image_id
+            referencedColumnName: id
+
+    oneToMany:
+        components:
+            targetEntity: Domain\Entities\PageComponent
+            mappedBy: page
+
+    lifecycleCallbacks:
+          prePersist: [setCreatedAtValue, setSlug]
+          preUpdate: [setUpdatedAtValue, setSlug]

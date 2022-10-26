@@ -1,0 +1,51 @@
+Domain\Entities\Weather\WeatherCity:
+    type: entity
+    table: weather_cities
+    indexes:
+      idIdx:
+        columns: [ id ]
+      cityIdx:
+        columns: [ city_id ]
+      normalizeCityIdx:
+        columns: [ normalize_city_name ]
+      normalizeCountryIdx:
+        columns: [ normalize_country_name ]
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cityName:
+            type: string
+            nullable: false
+            length: 256
+        countryName:
+          type: string
+          nullable: false
+          length: 256
+        cityId:
+            type: integer
+            nullable: false
+        featured:
+          type: integer
+          nullable: false
+          options:
+            default: 0
+        position:
+          type: integer
+          nullable: false
+          options:
+            default: 9999
+        normalizeCityName:
+          type: string
+          nullable: false
+          length: 256
+        normalizeCountryName:
+          type: string
+          nullable: false
+          length: 256

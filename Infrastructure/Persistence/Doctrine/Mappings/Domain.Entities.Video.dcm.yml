@@ -1,0 +1,42 @@
+Domain\Entities\Video:
+    type: entity
+    table: videos
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        vodKey:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+            column: vod_key
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    oneToMany:
+        articles:
+            targetEntity: Domain\Entities\Article
+            mappedBy: mainVideo
+
+    lifecycleCallbacks:
+            prePersist: [setCreatedAtValue]
+            preUpdate: [setUpdatedAtValue]

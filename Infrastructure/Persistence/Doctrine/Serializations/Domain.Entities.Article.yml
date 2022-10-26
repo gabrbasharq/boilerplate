@@ -1,0 +1,84 @@
+Domain\Entities\Article:
+#  exclusion_policy: ALL
+  properties:
+    published:
+      exclude: true
+    type:
+      exclude: true
+    isLocked:
+      exclude: true
+    lockedBy:
+      exclude: true
+    showMainImage:
+      exclude: true
+    bullets:
+      exclude: true
+    featured:
+      exclude: true
+    bannerImage:
+      exclude: true
+    bloombergContent:
+      exclude: true
+    hasBannerImage:
+      exclude: true
+    content:
+      exclude: true
+    securitiesSortIds:
+      exclude: true
+    securities:
+      exclude: true
+    videoStyle:
+      exclude: true
+    adMaterial:
+      exclude: true
+    history:
+      exclude: true
+
+    createdBy:
+      exclude: true
+
+    versions:
+      exclude: true
+    publishDate:
+      exclude: true
+    cryptoCurrencies:
+      exclude: true
+    normalizeContent:
+      exclude: true
+
+
+  virtual_properties:
+    isArticleType:
+    isNewsType:
+    isVideoType:
+    isBusinessWeekType:
+    isVideoStyle:
+    isPublished:
+    isScheduledToPublish:
+    isShowMainImage:
+    isAdMaterial:
+
+    getMainVideo:
+    getNewIntegratedMainVideo:
+    getMainImage:
+    getPublishedAtFormatted:
+    getUpdatedAtFormatted:
+    getArticleSluggableUrl:
+    getBullets:
+    isFeatured:
+    isLockedByUser:
+    getLockedBy:
+    isHasBannerImage:
+    isBloombergContent:
+    getContent:
+    getTypeName:
+    __description:
+    isHasHistory:
+    getCreatedAtFormatted:
+    getSimpleCreatedBy:
+    hasVersions:
+    hasNowVersions:
+    getSecurities:
+    getPublishDate:
+    getCryptoCurrencies:
+    getShortUrl:

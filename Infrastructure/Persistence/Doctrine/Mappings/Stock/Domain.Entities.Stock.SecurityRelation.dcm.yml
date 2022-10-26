@@ -1,0 +1,40 @@
+Domain\Entities\Stock\SecurityRelation:
+    type: entity
+    table: stock_securities_relations
+    positionIdx:
+      columns: [ position ]
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        manual:
+          type: smallint
+          nullable: false
+          options:
+            default: 0
+        position:
+          type: smallint
+          nullable: false
+          options:
+            default: 9999
+    manyToOne:
+      parent:
+        targetEntity: Domain\Entities\Stock\StockSecurity
+        inversedBy: parents
+        joinColumn:
+          name: child_id
+          referencedColumnName: id
+          onDelete: CASCADE
+      children:
+        targetEntity: Domain\Entities\Stock\StockSecurity
+        inversedBy: childrens
+        joinColumn:
+          onDelete: CASCADE
+          name: parent_id
+          referencedColumnName: id

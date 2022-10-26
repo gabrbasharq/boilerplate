@@ -1,0 +1,34 @@
+Domain\Entities\Stage:
+    type: entity
+    table: stages
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+        sort:
+            type: integer
+            nullable: false
+
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+    oneToMany:
+        articles:
+            targetEntity: Domain\Entities\Article
+            mappedBy: stage
+
+    lifecycleCallbacks:
+            prePersist: [setCreatedAtValue]

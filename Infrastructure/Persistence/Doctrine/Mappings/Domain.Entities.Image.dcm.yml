@@ -1,0 +1,54 @@
+Domain\Entities\Image:
+    type: entity
+    table: images
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        imageName:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+            column: image_name
+        description:
+            type: string
+            nullable: false
+            length: 1024
+            options:
+                fixed: false
+        photographerName:
+            type: string
+            nullable: true
+            length: 1024
+            options:
+                fixed: false
+            column: photographer_name
+        coordinates:
+          type: json_array
+          nullable: true
+          options:
+            fixed: false
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    oneToMany:
+        articles:
+            targetEntity: Domain\Entities\Article
+            mappedBy: mainImage
+
+    lifecycleCallbacks:
+            prePersist: [setCreatedAtValue]
+            preUpdate: [setUpdatedAtValue]

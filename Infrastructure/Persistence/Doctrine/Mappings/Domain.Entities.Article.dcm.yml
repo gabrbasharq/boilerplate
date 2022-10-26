@@ -1,0 +1,325 @@
+Domain\Entities\Article:
+  type: entity
+  table: articles
+  id:
+    id:
+      type: integer
+      nullable: false
+      options:
+        unsigned: true
+      id: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    title:
+      type: string
+      nullable: false
+      length: 255
+      options:
+        fixed: false
+    subtitle:
+      type: string
+      nullable: true
+      length: 255
+      options:
+        fixed: true
+    mainImageCustomDescription:
+      type: text
+      nullable: true
+      options:
+        fixed: true
+    mainImageCustomPhotographerName:
+      type: text
+      nullable: true
+      options:
+        fixed: true
+    content:
+      type: json_array
+      nullable: true
+      options:
+        fixed: false
+    slug:
+      type: string
+      nullable: false
+      length: 256
+      options:
+        fixed: false
+      column: slug
+    bullets:
+      type: string
+      nullable: true
+      length: 2024
+      options:
+        fixed: false
+      column: bullets
+    type:
+      type: smallint
+      nullable: false
+      options:
+        default: 0
+    featured:
+      type: smallint
+      nullable: false
+      options:
+        default: 0
+    showMainImage:
+      type: smallint
+      nullable: false
+      options:
+        default: 0
+      column: show_main_image
+    hasBannerImage:
+      type: smallint
+      nullable: false
+      options:
+        default: 0
+      column: has_banner_image
+    bloombergContentUrl:
+      type: string
+      nullable: true
+      length: 320
+      column: bloomberg_content_url
+    bloombergContent:
+      type: smallint
+      nullable: false
+      options:
+        default: 1
+    securitiesSortIds:
+      type: json_array
+      nullable: true
+      length: 256
+      options:
+      column: securities_sort_ids
+    videoStyle:
+      type: smallint
+      nullable: true
+      options:
+        default: 0
+      column: video_style
+    adMaterial:
+      type: smallint
+      nullable: false
+      options:
+        default: 1
+      column: ad_material
+    views:
+      type: integer
+      nullable: false
+      options:
+        default: 0
+    isLocked:
+      type: smallint
+      nullable: true
+      options:
+        default: 0
+      column: is_locked
+    published:
+      type: smallint
+      nullable: true
+      options:
+        default: 0
+    publishedAt:
+      type: datetime
+      nullable: true
+      column: published_at
+    createdAt:
+      type: datetime
+      nullable: true
+      column: created_at
+    updatedAt:
+      type: datetime
+      nullable: true
+      column: updated_at
+    lockedAt:
+      type: datetime
+      nullable: true
+      column: locked_at
+    publishDate:
+      type: datetime
+      nullable: true
+      column: publish_date
+    hasNowVersions:
+      type: smallint
+      nullable: true
+    newMainVideo:
+      type: string
+      nullable: true
+      length: 128
+      options:
+        fixed: false
+    cryptoCurrencies:
+      type: string
+      nullable: true
+      length: 128
+    shortUrl:
+      type: string
+      nullable: true
+      length: 128
+    normalizeContent:
+      type: text
+      nullable: true
+      length: 16777215
+  oneToMany:
+    history:
+      targetEntity: Domain\Entities\ArticleHistory
+      mappedBy: article
+      onDelete: CASCADE
+      cascade: [persist]
+    versions:
+      targetEntity: Domain\Entities\ArticleVersion
+      mappedBy: article
+      onDelete: CASCADE
+      cascade: [persist]
+  manyToOne:
+    mainImage:
+      targetEntity: Domain\Entities\Image
+      inversedBy: articles
+      joinColumn:
+        name: main_image_id
+        referencedColumnName: id
+    mainVideo:
+      targetEntity: Domain\Entities\Video
+      inversedBy: articles
+      joinColumn:
+        name: main_video_id
+        referencedColumnName: id
+    writer:
+      targetEntity: Domain\Entities\Writer
+      nullable: true
+      inversedBy: articles
+      joinColumn:
+        name: writer_id
+        referencedColumnName: id
+    newsSource:
+      targetEntity: Domain\Entities\NewsSource
+      nullable: true
+      inversedBy: articles
+      joinColumn:
+        name: news_source_id
+        referencedColumnName: id
+    createdBy:
+      targetEntity: Domain\Entities\User
+      inversedBy: articles
+      joinColumn:
+        name: created_by
+        referencedColumnName: id
+    lockedBy:
+      targetEntity: Domain\Entities\User
+      inversedBy: articles
+      joinColumn:
+        name: locked_by
+        referencedColumnName: id
+    stage:
+      targetEntity: Domain\Entities\Stage
+      inversedBy: articles
+      nullable: true
+      joinColumn:
+        name: stage_id
+        referencedColumnName: id
+    weatherCity:
+      targetEntity: Domain\Entities\Weather\WeatherCity
+      nullable: true
+      joinColumn:
+        name: weather_id
+        referencedColumnName: id
+        onDelete: "SET NULL"
+  manyToMany:
+    sections:
+      targetEntity: Domain\Entities\Section
+      inversedBy: articles
+      joinTable:
+        name: article_sections
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          section_id:
+            referencedColumnName: id
+    authors:
+      targetEntity: Domain\Entities\Author
+      inversedBy: articles
+      joinTable:
+        name: article_authors
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          author_id:
+            referencedColumnName: id
+    securities:
+      targetEntity: Domain\Entities\Stock\StockSecurity
+      inversedBy: articles
+      joinTable:
+        name: article_securities
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          security_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+    tags:
+      targetEntity: Domain\Entities\Tag
+      inversedBy: articles
+      joinTable:
+        name: article_tags
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          tag_id:
+            referencedColumnName: id
+    jargon:
+      targetEntity: Domain\Entities\Jargon
+      inversedBy: articles
+      joinTable:
+        name: article_jargon
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          jargon_id:
+            referencedColumnName: id
+    countries:
+      targetEntity: Domain\Entities\Country
+      inversedBy: articles
+      joinTable:
+        name: article_countries
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          country_id:
+            referencedColumnName: id
+    blockedCountries:
+      targetEntity: Domain\Entities\Country
+      joinTable:
+        name: article_blocked_countries
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          country_id:
+            referencedColumnName: id
+    industries:
+      targetEntity: Domain\Entities\Industry
+      inversedBy: articles
+      joinTable:
+        name: article_industries
+        joinColumns:
+          article_id:
+            referencedColumnName: id
+            onDelete: CASCADE
+        inverseJoinColumns:
+          industry_id:
+            referencedColumnName: id
+  lifecycleCallbacks:
+    prePersist: [setCreatedAtValue, setSlug]
+    preUpdate: [setUpdatedAtValue, setSlug]

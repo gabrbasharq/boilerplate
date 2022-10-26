@@ -1,0 +1,9 @@
+Domain\Entities\Stock\StockSecuritySuggestion:
+#  exclusion_policy: ALL
+  properties:
+    security:
+       exclude: true
+
+  virtual_properties:
+    getSecurity:
+    getTypeName:

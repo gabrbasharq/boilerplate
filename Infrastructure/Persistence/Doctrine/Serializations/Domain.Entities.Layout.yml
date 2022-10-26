@@ -1,0 +1,15 @@
+Domain\Entities\Layout:
+  properties:
+    picture:
+      exclude: true
+    isSideBar:
+      exclude: true
+
+  virtual_properties:
+    getPictureUrl:
+    isSidebarType:
+      serialized_name: isSidebarType
+    isNormalType:
+      serialized_name: isNormalType
+    isFullScreenType:
+      serialized_name: isFullScreenType

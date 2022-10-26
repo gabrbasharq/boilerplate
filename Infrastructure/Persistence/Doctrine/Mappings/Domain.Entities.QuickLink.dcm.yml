@@ -1,0 +1,30 @@
+Domain\Entities\QuickLink:
+    type: entity
+    table: quick_links
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+        url:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+        sort:
+            type: integer
+            nullable: false
+            options:
+                default: 999

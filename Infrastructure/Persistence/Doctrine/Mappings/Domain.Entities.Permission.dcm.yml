@@ -1,0 +1,35 @@
+Domain\Entities\Permission:
+    type: entity
+    table: permissions
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        moduleName:
+            type: string
+            nullable: false
+            length: 64
+            options:
+                fixed: false
+            column: moduleName
+        rule:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+        ruleDescription:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+            column: ruleDescription
+
+    lifecycleCallbacks:

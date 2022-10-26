@@ -1,0 +1,42 @@
+Domain\Entities\Country:
+    type: entity
+    table: countries
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+        displayName:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+            column: display_name
+        countryCode:
+            type: string
+            nullable: true
+            length: 16
+            options:
+                fixed: false
+            column: country_code
+        countryCurrency:
+            type: string
+            nullable: true
+            length: 16
+            options:
+                fixed: false
+            column: country_currency
+
+    lifecycleCallbacks:

@@ -1,0 +1,60 @@
+{
+    "name": "laravel/lumen",
+    "description": "The Laravel Lumen Framework.",
+    "keywords": [
+        "framework",
+        "laravel",
+        "lumen"
+    ],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/redis": "^9.37",
+        "jms/serializer": "^3.18",
+        "laravel-doctrine/orm": "^1.8",
+        "laravel/lumen-framework": "^9.0",
+        "predis/predis": "^2.0",
+        "symfony/cache": "^6.1"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.4",
+        "phpunit/phpunit": "^9.5.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\Bloomberg\\": "Application/Bloomberg/core/",
+            "Application\\Error\\": "Application/Error/",
+            "Application\\Bloomberg\\Constants\\": "Application/Bloomberg/Constants/",
+            "Application\\Bloomberg\\Libraries\\": "Application/Bloomberg/Libraries/",
+            "Application\\Services\\": "Application/Services/",
+            "Application\\Caching\\": "Application/Caching/",
+            "Domain\\": "Domain/",
+            "Infrastructure\\": "Infrastructure/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "Infrastructure/Util/helper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

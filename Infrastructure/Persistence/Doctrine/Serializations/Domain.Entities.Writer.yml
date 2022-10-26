@@ -1,0 +1,9 @@
+Domain\Entities\Writer:
+  #exclusion_policy: ALL
+  properties:
+    articles:
+        exclude: true
+
+  virtual_properties:
+    getImageUrl:
+    getTwitterAccountName:

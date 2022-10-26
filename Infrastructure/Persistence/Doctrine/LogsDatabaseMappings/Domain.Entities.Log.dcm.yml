@@ -1,0 +1,77 @@
+Domain\Entities\Log:
+    type: entity
+    table: logs
+    indexes:
+      name_index:
+        columns: [ action ]
+    id:
+      id:
+        type: integer
+        nullable: false
+        options:
+          unsigned: true
+        id: true
+        generator:
+          strategy: IDENTITY
+    fields:
+      action:
+        type: integer
+        nullable: false
+        options:
+          fixed: false
+      moduleName:
+        type: string
+        nullable: false
+        length: 256
+        options:
+          fixed: false
+      entityId:
+        type: integer
+        nullable: true
+        options:
+          fixed: false
+      entityDefinition:
+        type: string
+        nullable: true
+        options:
+          fixed: false
+      moveFrom:
+        type: string
+        nullable: true
+        length: 256
+        options:
+          fixed: false
+      moveTo:
+        type: string
+        nullable: true
+        length: 256
+        options:
+          fixed: false
+      oldEntity:
+        type: object
+        nullable: true
+        options:
+          fixed: false
+      newEntity:
+        type: object
+        nullable: true
+        options:
+          fixed: false
+      createdAt:
+        type: datetime
+        nullable: true
+        column: created_at
+      createdById:
+        type: integer
+        nullable: true
+        options:
+          fixed: false
+      createdByName:
+        type: string
+        nullable: true
+        length: 256
+        options:
+          fixed: false
+    manyToOne:
+    lifecycleCallbacks:
+      prePersist: [setCreatedAtValue]

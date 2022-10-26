@@ -1,0 +1,26 @@
+Domain\Entities\MobileUserToken:
+    type: entity
+    table: mobiles_users_tokens
+    id:
+        deviceId:
+            type: string
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: NONE
+    fields:
+        osType:
+            type: smallint
+            nullable: false
+            options:
+                fixed: false
+        token:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+
+    lifecycleCallbacks:

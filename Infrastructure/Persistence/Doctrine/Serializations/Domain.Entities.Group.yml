@@ -1,0 +1,10 @@
+Domain\Entities\Group:
+  #exclusion_policy: ALL
+  properties:
+     stages:
+        exclude: true
+     permissions:
+        exclude: true
+
+#  virtual_properties:
+#    groupedPermissions:

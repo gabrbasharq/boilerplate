@@ -1,0 +1,44 @@
+Domain\Entities\Stock\StockRegion:
+    type: entity
+    table: stock_regions
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        displayName:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+            column: display_name
+        slug:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: slug
+    manyToMany:
+        securities:
+            targetEntity: Domain\Entities\Stock\StockSecurity
+            inversedBy: regions
+            joinTable:
+                name: stock_regions_securities
+                joinColumns:
+                    region_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE
+                inverseJoinColumns:
+                    security_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE
+    lifecycleCallbacks:
+            prePersist: [setSlug]
+            preUpdate: [setSlug]

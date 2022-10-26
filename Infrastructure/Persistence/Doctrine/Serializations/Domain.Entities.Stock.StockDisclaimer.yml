@@ -1,0 +1,7 @@
+Domain\Entities\Stock\StockDisclaimer:
+#  exclusion_policy: ALL
+  properties:
+     securities:
+       exclude: true
+
+  virtual_properties: {}

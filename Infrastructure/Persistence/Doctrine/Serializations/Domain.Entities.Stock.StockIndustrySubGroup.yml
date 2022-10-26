@@ -1,0 +1,9 @@
+Domain\Entities\Stock\StockIndustrySubGroup:
+#  exclusion_policy: ALL
+  properties:
+     securities:
+        exclude: true
+     industryGroup:
+        groups: [industryGroup]
+
+  virtual_properties: {}

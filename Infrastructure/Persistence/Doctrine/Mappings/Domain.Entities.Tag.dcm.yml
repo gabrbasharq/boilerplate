@@ -1,0 +1,66 @@
+Domain\Entities\Tag:
+    type: entity
+    table: tags
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+
+        fixed:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+        quickAccess:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+
+        slug:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: slug
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        isBusinessWeek:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+    manyToOne:
+        createdBy:
+            targetEntity: Domain\Entities\User
+            inversedBy: tags
+            joinColumn:
+                name: created_by
+                referencedColumnName: id
+
+    manyToMany:
+        articles:
+            targetEntity: Domain\Entities\Article
+            mappedBy: tags
+    lifecycleCallbacks:
+        prePersist: [setCreatedAtValue, setSlug]
+        preUpdate: [setUpdatedAtValue, setSlug]

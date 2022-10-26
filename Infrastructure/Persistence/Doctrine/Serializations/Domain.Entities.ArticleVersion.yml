@@ -1,0 +1,9 @@
+Domain\Entities\ArticleVersion:
+#  exclusion_policy: ALL
+#  properties:
+#    content:
+#      exclude: true
+
+
+  virtual_properties:
+    getSimpleCreatedBy:

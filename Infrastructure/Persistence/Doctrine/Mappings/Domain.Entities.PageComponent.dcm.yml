@@ -1,0 +1,32 @@
+Domain\Entities\PageComponent:
+    type: entity
+    table: pages_components
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        position:
+            type: integer
+            options:
+                fixed: false
+    manyToOne:
+        page:
+          targetEntity: Domain\Entities\Page
+          inversedBy: components
+          joinColumn:
+            referencedColumnName: id
+            onDelete: CASCADE
+        component:
+          targetEntity: Domain\Entities\Component
+          inversedBy: pages
+          joinColumn:
+            referencedColumnName: id
+            onDelete: CASCADE
+
+    lifecycleCallbacks: {}

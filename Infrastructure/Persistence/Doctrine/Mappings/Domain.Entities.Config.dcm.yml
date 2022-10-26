@@ -1,0 +1,31 @@
+Domain\Entities\Config:
+    type: entity
+    table: config
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        type:
+            type: integer
+            unique: false
+            nullable: false
+            options:
+                fixed: false
+        data:
+            type: json_array
+            nullable: false
+            column: data
+        name:
+            type: string
+            nullable: true
+            length: 128
+            options:
+                fixed: false
+
+    lifecycleCallbacks: {}

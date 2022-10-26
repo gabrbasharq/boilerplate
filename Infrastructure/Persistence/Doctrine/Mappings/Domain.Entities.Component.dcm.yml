@@ -1,0 +1,146 @@
+Domain\Entities\Component:
+    type: entity
+    table: components
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+        labelName:
+          type: string
+          nullable: true
+          length: 256
+          options:
+            fixed: false
+        contentTypes:
+            type: string
+            nullable: true
+            length: 128
+            options:
+              default: 0
+            column: content_types
+        articleIds:
+          type: json_array
+          nullable: true
+          length: 128
+          column: article_ids
+        auto:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+        slug:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: slug
+        clickable:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+        hasContentByCountry:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+            column: has_content_by_country
+        customUrl:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+            column: custom_url
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        showTitle:
+          type: integer
+          nullable: false
+          options:
+            default: 0
+    manyToOne:
+        layout:
+            targetEntity: Domain\Entities\Layout
+            joinColumn:
+                name: layout_id
+                referencedColumnName: id
+        socialConfig:
+          targetEntity: Domain\Entities\Config
+          joinColumn:
+            name: config_id
+            referencedColumnName: id
+        createdBy:
+          targetEntity: Domain\Entities\User
+          inversedBy: components
+          joinColumn:
+            name: created_by
+            referencedColumnName: id
+        image:
+          targetEntity: Domain\Entities\Image
+          joinColumn:
+            name: image_id
+            referencedColumnName: id
+        secondImage:
+          targetEntity: Domain\Entities\Image
+          joinColumn:
+            name: second_image_id
+            referencedColumnName: id
+        logo:
+          targetEntity: Domain\Entities\Image
+          joinColumn:
+            name: logo_image_id
+            referencedColumnName: id
+    manyToMany:
+      sections:
+        targetEntity: Domain\Entities\Section
+        inversedBy: components
+        joinTable:
+          name: components_sections
+          joinColumns:
+            component_id:
+              referencedColumnName: id
+              onDelete: CASCADE
+          inverseJoinColumns:
+            section_id:
+              referencedColumnName: id
+              onDelete: CASCADE
+      tags:
+        targetEntity: Domain\Entities\Tag
+        inversedBy: components
+        joinTable:
+          name: components_tags
+          joinColumns:
+            component_id:
+              referencedColumnName: id
+              onDelete: CASCADE
+          inverseJoinColumns:
+            tag_id:
+              referencedColumnName: id
+              onDelete: CASCADE
+    oneToMany:
+      pages:
+        targetEntity: Domain\Entities\PageComponent
+        mappedBy: component
+    lifecycleCallbacks:
+          prePersist: [setCreatedAtValue, setSlug]
+          preUpdate: [setUpdatedAtValue, setSlug]

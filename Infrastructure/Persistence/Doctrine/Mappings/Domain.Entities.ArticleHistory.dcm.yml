@@ -1,0 +1,57 @@
+Domain\Entities\ArticleHistory:
+    type: entity
+    table: articles_history
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        content:
+            type: json_array
+            nullable: true
+            options:
+                fixed: false
+        status:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+        timeSpentEditing:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: time_spent_editing
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+    manyToOne:
+        createdBy:
+            targetEntity: Domain\Entities\User
+            inversedBy: groups
+            joinColumn:
+                name: created_by
+                referencedColumnName: id
+        article:
+            targetEntity: Domain\Entities\Article
+            inversedBy: history
+            joinColumn:
+                name: article_id
+                referencedColumnName: id
+                onDelete: CASCADE
+
+    lifecycleCallbacks:
+          prePersist: [setCreatedAtValue]

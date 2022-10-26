@@ -1,0 +1,11 @@
+Domain\Entities\Video:
+  #exclusion_policy: ALL
+  properties:
+     articles:
+        exclude: true
+
+  virtual_properties:
+    isHasArticles:
+    getThumbnailUrl:
+    getVideoEmbeddedUrl:
+    isReady:

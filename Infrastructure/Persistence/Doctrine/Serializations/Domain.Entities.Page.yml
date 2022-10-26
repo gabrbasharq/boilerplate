@@ -1,0 +1,18 @@
+Domain\Entities\Page:
+#  exclusion_policy: ALL
+  properties:
+    hasScrollingComponent:
+      exclude: true
+    countriesCodes:
+      exclude: true
+
+#    components:
+#        groups: [All]
+
+  virtual_properties:
+    isHasSideBarComponentStyle:
+    isHasCountryByCode:
+    isHasScrollingComponent:
+    getCountriesCodes:
+
+

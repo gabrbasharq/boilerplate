@@ -1,0 +1,92 @@
+Domain\Entities\User:
+    type: entity
+    table: users
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+        username:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+            column: user_name
+        email:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        mobile:
+            type: string
+            nullable: true
+            length: 64
+            options:
+                fixed: false
+        password:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        avatar:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        isActive:
+            type: integer
+            nullable: true
+            options:
+                default: 0
+            column: is_active
+        passwordChanged:
+            type: integer
+            nullable: true
+            options:
+                default: 0
+            column: password_changed
+        secret:
+            type: string
+            nullable: true
+            length: 128
+            options:
+                fixed: false
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    manyToOne:
+        createdBy:
+            targetEntity: Domain\Entities\User
+            inversedBy: users
+            joinColumn:
+                name: created_by
+                referencedColumnName: id
+        group:
+            targetEntity: Domain\Entities\Group
+            inversedBy: users
+            joinColumn:
+                name: group_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [setCreatedAtValue]
+        preUpdate: [setUpdatedAtValue]

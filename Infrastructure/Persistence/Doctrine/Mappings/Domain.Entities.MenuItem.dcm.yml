@@ -1,0 +1,77 @@
+Domain\Entities\MenuItem:
+    type: entity
+    table: menu_items
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        label:
+            type: string
+            nullable: true
+            length: 128
+            options:
+                fixed: false
+            column: label
+        customUrl:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+            column: custom_url
+        clickable:
+            type: integer
+            nullable: false
+            options:
+                default: 1
+            column: clickable
+        position:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+            column: position
+        active:
+            type: integer
+            nullable: false
+            options:
+                default: 1
+            column: active
+    oneToOne:
+        page:
+            targetEntity: Domain\Entities\Page
+            joinColumn:
+                name: page_id
+                referencedColumnName: id
+                onDelete: CASCADE
+        section:
+            targetEntity: Domain\Entities\Section
+            joinColumn:
+                name: section_id
+                referencedColumnName: id
+                onDelete: CASCADE
+        tag:
+            targetEntity: Domain\Entities\Tag
+            joinColumn:
+                name: tag_id
+                referencedColumnName: id
+                onDelete: CASCADE
+    oneToMany:
+      children:
+        targetEntity: Domain\Entities\MenuItem
+        mappedBy: parent
+        joinColumn:
+            name: parent_id
+            referencedColumnName: id
+            onDelete: CASCADE
+    manyToOne:
+      parent:
+        targetEntity: Domain\Entities\MenuItem
+        inversedBy: children
+    lifecycleCallbacks:

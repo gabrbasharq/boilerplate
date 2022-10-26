@@ -1,0 +1,9 @@
+Domain\Entities\PageComponent:
+#  exclusion_policy: ALL
+  properties:
+     id:
+        exclude: true
+
+#  virtual_properties:
+#    getImagesUrls:
+#      serialized_name: imagesUrls

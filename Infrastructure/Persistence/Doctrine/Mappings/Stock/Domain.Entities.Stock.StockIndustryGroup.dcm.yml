@@ -1,0 +1,80 @@
+Domain\Entities\Stock\StockIndustryGroup:
+    type: entity
+    table: stock_industry_groups
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+        position:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+        securitiesSortIds:
+            type: json_array
+            nullable: true
+            length: 256
+            options:
+            column: securities_sort_ids
+        slug:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: slug
+        type:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+        isWeb:
+            type: smallint
+            nullable: false
+            options:
+                default: 1
+            column: is_web
+        isMobHome:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+            column: is_mob_home
+    oneToMany:
+        industrySubgroups:
+            targetEntity: Domain\Entities\Stock\StockIndustrySubGroup
+            orderBy: { 'position': 'ASC' }
+            mappedBy: industryGroup
+#        securities:
+#            targetEntity: Domain\Entities\Stock\StockSecurity
+#            mappedBy: industryGroup
+
+    manyToMany:
+        securities:
+            targetEntity: Domain\Entities\Stock\StockSecurity
+            inversedBy: industryGroups
+            joinTable:
+                name: stock_industry_group_securities
+                joinColumns:
+                    industry_group_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE
+                inverseJoinColumns:
+                    security_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE
+    lifecycleCallbacks:
+        prePersist: [setSlug]
+        preUpdate: [setSlug]

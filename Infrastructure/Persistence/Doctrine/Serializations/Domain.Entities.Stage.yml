@@ -1,0 +1,5 @@
+Domain\Entities\Stage:
+#  exclusion_policy: ALL
+  properties:
+     articles:
+        exclude: true

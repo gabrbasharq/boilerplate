@@ -1,0 +1,10 @@
+Domain\Entities\Tag:
+  #exclusion_policy: ALL
+  properties:
+    articles:
+        exclude: true
+    quickAccess:
+        exclude: true
+
+  virtual_properties:
+    getQuickAccess:

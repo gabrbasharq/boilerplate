@@ -1,0 +1,33 @@
+Domain\Entities\FailedJobs:
+    type: entity
+    table: failed_jobs
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        connection:
+            type: text
+            options:
+                fixed: false
+        queue:
+            type: text
+            options:
+                fixed: false
+        payload:
+            type: text
+            options:
+                fixed: false
+        exception:
+            type: text
+            options:
+                fixed: false
+        failedAt:
+            type: datetime
+            nullable: true
+            column: failed_at

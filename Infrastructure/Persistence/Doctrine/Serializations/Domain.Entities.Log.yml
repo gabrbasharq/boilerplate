@@ -1,0 +1,17 @@
+Domain\Entities\Log:
+  properties:
+      createdBy:
+        exclude: true
+      createdAt:
+        exclude: true
+      oldEntity:
+        exclude: true
+      newEntity:
+        exclude: true
+  virtual_properties:
+    __formatted:
+    getCreatedAtFormatted:
+    getSimpleCreatedBy:
+    hasOldEntity:
+    hasNewEntity:
+    getActionName:

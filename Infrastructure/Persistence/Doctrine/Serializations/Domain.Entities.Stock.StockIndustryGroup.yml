@@ -1,0 +1,22 @@
+Domain\Entities\Stock\StockIndustryGroup:
+#  exclusion_policy: ALL
+  properties:
+     securities:
+        exclude: true
+     industrySubgroups:
+        groups: [industrySubgroups]
+     isWeb:
+       exclude: true
+     isMobHome:
+       exclude: true
+
+  virtual_properties:
+      isMarketType:
+      isSectorType:
+      isCommodityType:
+      isCompanyType:
+      isCurrencyType:
+      getTypeName:
+      hasIndustrySubgroups:
+      isForWeb:
+      isForMobHome:

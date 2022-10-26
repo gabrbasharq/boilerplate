@@ -1,0 +1,43 @@
+Domain\Entities\Stock\StockCountry:
+    type: entity
+    table: stock_countries
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        displayName:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: display_name
+        slug:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+            column: slug
+    manyToOne:
+        region:
+          targetEntity: Domain\Entities\Stock\StockRegion
+          nullable: false
+          inversedBy: countries
+          joinColumn:
+            name: region_id
+            referencedColumnName: id
+    oneToMany:
+        securities:
+            targetEntity: Domain\Entities\Stock\StockSecurity
+            mappedBy: country
+
+    lifecycleCallbacks:
+            prePersist: [setSlug]
+            preUpdate: [setSlug]

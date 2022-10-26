@@ -1,0 +1,35 @@
+Domain\Entities\ComponentPageArticle:
+    type: entity
+    table: component_page_articles
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+    manyToOne:
+        component:
+            targetEntity: Domain\Entities\Component
+            inversedBy: articles
+            joinColumn:
+                name: component_id
+                referencedColumnName: id
+                onDelete: CASCADE
+        page:
+            targetEntity: Domain\Entities\Page
+            inversedBy: components
+            joinColumn:
+                name: page_id
+                referencedColumnName: id
+                onDelete: CASCADE
+        article:
+            targetEntity: Domain\Entities\Article
+            inversedBy: components
+            joinColumn:
+                name: article_id
+                referencedColumnName: id
+                onDelete: CASCADE

@@ -1,0 +1,37 @@
+Domain\Entities\MobileUserNotification:
+    type: entity
+    table: mobiles_users_notifications
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        forIos:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+        forAndroid:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+        finished:
+            type: smallint
+            nullable: false
+            options:
+                default: 0
+    manyToOne:
+        article:
+            targetEntity: Domain\Entities\Article
+            joinColumn:
+                name: article_id
+                referencedColumnName: id
+                onDelete: CASCADE
+
+    lifecycleCallbacks:

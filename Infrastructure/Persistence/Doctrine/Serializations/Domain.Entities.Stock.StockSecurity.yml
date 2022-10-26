@@ -1,0 +1,61 @@
+Domain\Entities\Stock\StockSecurity:
+#  exclusion_policy: ALL
+  properties:
+    active:
+       exclude: true
+    address:
+       exclude: true
+    execOfficers:
+       exclude: true
+    boardMembers:
+       exclude: true
+    articles:
+       exclude: true
+    authorizedApiData:
+       exclude: true
+    apiData:
+      exclude: true
+
+    region:
+      groups: [region]
+
+    parents:
+      exclude: true
+    country:
+      groups: [country]
+    industrySubgroup:
+      groups: [industrySubgroup]
+    childrens:
+      exclude: true
+    synced:
+      exclude: true
+    suggestions:
+      exclude: true
+    fromCache:
+      exclude: true
+
+
+  virtual_properties:
+      isMarketType:
+      isSectorType:
+      isCommodityType:
+      isCompanyType:
+      isFundType:
+      isBondType:
+      isCurrencyType:
+      isParent:
+      hasParent:
+      hasChildren:
+      hasActiveChildren:
+      getChildrenCount:
+      getActiveChildrenCount:
+      getTypeName:
+      getAddress:
+      getExecOfficers:
+      getBoardMembers:
+      isActive:
+      isAuthorizedApiData:
+      getApiData:
+#      getParents:
+      getParentsNames:
+      isFromCache:
